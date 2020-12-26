@@ -1,0 +1,10 @@
+[package]
+name = "neuralnetwork"
+version = "0.1.0"
+authors = ["Alexander Pfefferle <alex@pfefferle.xyz>"]
+edition = "2018"
+repository = "https://github.com/alexanderpfefferle/neuralnetwork"
+description = "A small neural network lib written from scratch"
+license = "MIT"
+
+[dependencies]
