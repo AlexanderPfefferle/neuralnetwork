@@ -41,3 +41,33 @@ Content of xor.csv:
 1,0,1
 1,1,0
 ```
+
+### MNIST Example:
+Creates a net with 784 input nodes, 2 hidden layers which have 8 nodes each and 10 output nodes, using sigmoid as an activation function and learning rate set to 0.1.
+
+```rust
+use neuralnetwork::neuralnetwork::NeuralNetwork;
+use neuralnetwork::{get_accuracy, train_on_dataset};
+
+fn main() {
+    let mut nn = NeuralNetwork::new(784, vec![8, 8], 10, 0.1, "sigmoid");
+    train_on_dataset(
+        &mut nn,
+        "mnist_train.csv",
+        10,
+    );
+    print!(
+        "Accuarcy: {}%\n",
+        get_accuracy(&nn, "mnist_test.csv") * 100.0
+    );
+}
+```
+
+The dataset used is a modified version of mnist, where the first 784 values in each line are the inputs scaled down to the range [0,1],
+and the last 10 represent the output, using one-hot encoding.
+
+`train_on_dataset` takes a net, a path to a dataset and the number of epochs as input and trains the net via stochastic gradient descent.
+
+`get_accuracy` calculates the accuracy on the test set, it assumes one-hot encoding and checks whether the node with the highest value is the right one.
+
+It takes ~30s to train it for 10 epochs and it achieves an accuracy >90%.
